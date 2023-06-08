@@ -1,0 +1,36 @@
+<openerp>
+	<data>
+		<record model = 'ir.ui.view' id = 'vat_report_wizard'>
+            <field name = 'name'>VAT Input/Output Report Wizard</field>
+            <field name = 'model'>vat.report.wizard</field>
+            <field name = 'arch' type = 'xml'>
+                <form string = "VAT Input/Output Report Filters">
+                        <group string = "Filters">
+                            <group>
+                                <field name = 'start_date'/>
+                            </group>
+                            <group>
+                                <field name = 'end_date'/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name = "print_xlsx_report" type = "object" string = "Print VAT Report" class = "oe_highlight"/>
+                            or
+                            <button special = "cancel" string = "Cancel"/>
+                        </footer>
+                    </form>
+            </field>
+        </record>
+
+        <act_window id = "launch_vat_report_wizard"
+                name = "VAT Input/Output Report"
+                src_model = "account.move.line"
+                res_model = "vat.report.wizard"
+                view_mode = "form"
+                target = "new"
+                key2 = "client_action_multi" />
+
+        <menuitem name = "VAT Input/Output" id = 'vat_input_output_report_menu' parent = "account.menu_finance_generic_reporting" sequence = "20" action = "launch_vat_report_wizard"/>
+
+	</data>
+</openerp>

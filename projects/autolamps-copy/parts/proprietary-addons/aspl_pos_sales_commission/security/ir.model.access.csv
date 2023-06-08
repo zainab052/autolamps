@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sales_commission,access_sales_commission,model_sales_commission,base.group_user,1,1,1,1
+access_commission_rule_group,access_commission_rule_group,model_commission_rule_group,base.group_user,1,1,1,1
+access_commission_rule,access_commission_rule,model_commission_rule,base.group_user,1,1,1,1
+access_commission_rule_product,access_commission_rule_product,model_commission_rule_product,base.group_user,1,1,1,1
+access_commission_rule_category,access_commission_rule_category,model_commission_rule_category,base.group_user,1,1,1,1
+access_commission_beneficial,access_commission_beneficial,model_commission_beneficial,base.group_user,1,1,1,1
+access_sales_target_user,access_sales_target_user,model_sales_target,base.group_user,1,0,0,0
+access_sales_target_line_user,access_sales_target_line_user,model_sales_target_line,base.group_user,1,0,0,0
+access_sales_target_admin,access_sales_target_admin,model_sales_target,base.group_erp_manager,1,1,1,1
+access_sales_target_line_admin,access_sales_target_line_admin,model_sales_target_line,base.group_erp_manager,1,1,1,1

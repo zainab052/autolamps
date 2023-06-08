@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    
+    <t t-extend="ProductScreenWidget">
+        <t t-jquery="tr.header-row" t-operation="before">
+            <tr class="selection-area">
+                <td style="padding: 8px;text-align:left;">
+                    <select id="price_list" style="font-size:16px;">
+                    </select>
+                </td>
+            </tr>
+        </t>
+    </t>
+
+</templates>

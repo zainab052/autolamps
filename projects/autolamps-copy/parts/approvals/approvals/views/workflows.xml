@@ -1,0 +1,115 @@
+<openerp>
+	<data>
+		<!-- Approval Request Workflows -->
+		<record model = 'workflow' id = 'approval_workflow'>
+			<field name = 'name'>Approvals Workflow</field>
+			<field name = 'osv'>approval.request</field>
+			<field name = 'on_create'>true</field>
+		</record>
+
+		<record id = "activity_approval_start" model = "workflow.activity">
+			<field name ="wkf_id" ref = "approval_workflow"/>
+			<field name = "flow_start">True</field>
+			<field name = "name">Approval Start</field>
+			<field name = "kind">function</field>
+			<field name = "action">
+				get_sequence()
+				get_approvers()
+			</field>
+		</record>
+
+		<record id = "activity_get_next_approver" model = "workflow.activity">
+			<field name ="wkf_id" ref = "approval_workflow"/>
+			<field name = "name">Get Next Approver</field>
+			<field name = "kind">function</field>
+			<field name = "action">
+				approve_request()
+				get_next_approver()
+				get_url()
+				notify()
+			</field>
+		</record>
+
+		<record id = "activity_approver_decision" model = "workflow.activity">
+			<field name ="wkf_id" ref = "approval_workflow"/>
+			<field name = "name">Approver Decision</field>
+			<field name = "kind">dummy</field>
+			<!-- <field name = "action">
+				get_next_approver()
+			</field> -->
+		</record>
+
+		<record id = "activity_approval_approve" model = "workflow.activity">
+			<field name ="wkf_id" ref = "approval_workflow"/>
+			<field name = "flow_stop">True</field>
+			<field name = "name">Approved</field>
+			<field name = "kind">function</field>
+			<field name="signal_send">subflow.approved</field>
+			<field name = 'action'>
+				mark_as_approved()
+				notify_accept_approval()
+			</field>
+		</record>
+
+		<record id = "activity_approval_reject" model = "workflow.activity">
+			<field name ="wkf_id" ref = "approval_workflow"/>
+			<field name = "flow_stop">True</field>
+			<field name = "name">Rejected</field>
+			<field name = "kind">function</field>
+			<field name="signal_send">subflow.rejected</field>
+			<field name = 'action'>
+				mark_as_rejected()
+				notify_reject_approval()
+			</field>
+		</record>
+
+		<record id = "activity_approval_modify" model = "workflow.activity">
+			<field name ="wkf_id" ref = "approval_workflow"/>
+			<field name = "flow_stop">True</field>
+			<field name = "name">Modify</field>
+			<field name = "kind">function</field>
+			<field name="signal_send">subflow.modify</field>
+			<field name = 'action'>
+				mark_as_modified()
+				notify_modify_approval()
+			</field>
+		</record>
+
+		<!-- Transitions -->
+		<record id="trans_approval_start" model="workflow.transition">
+			<field name="act_from" ref="activity_approval_start"/>
+			<field name="act_to" ref="activity_get_next_approver"/>
+			<field name = 'signal'>send_approval_request</field>
+		</record>
+
+		<record id="trans_approval_approvers" model="workflow.transition">
+			<field name="act_from" ref="activity_get_next_approver"/>
+			<field name="act_to" ref="activity_approver_decision"/>
+			<!-- <field name = 'signal'>send_approval_request</field> -->
+		</record>
+
+		<record id="trans_approval_decision" model="workflow.transition">
+			<field name="act_from" ref="activity_approver_decision"/>
+			<field name="act_to" ref="activity_get_next_approver"/>
+			<field name = 'signal'>pass_to_next_approver</field>
+		</record>
+
+		<record id="trans_approve_close" model="workflow.transition">
+			<field name="act_from" ref="activity_approver_decision"/>
+			<field name="act_to" ref="activity_approval_approve"/>
+			<field name = 'condition'>approved == True</field>
+		</record>
+
+		<record id="trans_modify_close" model="workflow.transition">
+			<field name="act_from" ref="activity_approver_decision"/>
+			<field name="act_to" ref="activity_approval_modify"/>
+			<field name = 'condition'>user_modify == True</field>
+		</record>
+
+		<record id="trans_reject_close" model="workflow.transition">
+			<field name="act_from" ref="activity_approver_decision"/>
+			<field name="act_to" ref="activity_approval_reject"/>
+			<field name = 'condition'>rejected == True</field>
+		</record>
+	</data>
+</openerp>

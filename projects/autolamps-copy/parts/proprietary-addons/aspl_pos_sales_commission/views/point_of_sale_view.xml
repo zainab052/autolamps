@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="aspl_inherits_form_view_pos_pos_form" model="ir.ui.view">
+            <field name="name">pos.order.form</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="POS Sales Commission" name="pos_sales_commission">
+                        <group>
+                            <field name="commission_calculated" invisible="1"/>
+                        </group>
+                        <field name="pos_sales_commission_line" readonly="1">
+                            <tree editable="bottom">
+                                <field name="user_id"/>
+                                <field name="job_id"/>
+                                <field name="amount"/>
+                                <field name="pos_order_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="aspl_pos_comm_inherit_view_pos_config_form" model="ir.ui.view">
+            <field name="name">pos.config.form</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@string='Receipt']" position="after">
+                    <group name="commission" string="Commission">
+                        <field name="comm_rule_group_id" class="oe_inline" options="{'no_open': True, 'no_create': True}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

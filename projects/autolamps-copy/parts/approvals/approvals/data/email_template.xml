@@ -1,0 +1,277 @@
+<openerp>
+	<data>
+		<record id="approval_request_notification" model="email.template"> 
+			<field name="name">Approval Request E-mail Template</field>
+		    <field name="email_from">${object.company_id.name and object.company_id.email or ''}</field>
+		    <field name = 'subject'>Request for Approval for ${object.document_type} : ${object.document_no}</field>
+		    <field name="email_to">${object.current_approver and object.current_approver.login or ''}</field>
+		    <field name="lang">${object.lang}</field>
+		    <field name="model_id" ref="approvals.model_approval_request"/>
+		    <field name="auto_delete" eval="True"/>
+			<field name="body_html">
+				<![CDATA[
+		          <p>Dear ${(object.current_approver.name or 'Sir/Madam')},<br/><br/>
+
+				  A new approval request [${(object.no)}] has been sent to you for your action!<br/></p>
+				  <br/>
+
+				  % if object.approval_message_ids:
+				  <strong>Messages</strong>
+				  <ul>
+		          % for row in object.approval_message_ids:
+		            <li>${row.name}</li>
+		          %endfor
+			      </ul>
+			      % endif
+				
+				You can visit our portal below to see details the document:
+				<br/><br/>
+
+	  			<% set signup_url = object.url %>
+	  			<a style="display:block; width: 150px; height:20px; margin-left: 120px; color: #DDD; font-family: 'Lucida Grande', Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; text-align: center; text-decoration: none !important; line-height: 1; padding: 5px 0px 0px 0px; background-color: #8E0000; border-radius: 5px 5px; background-repeat: repeat no-repeat;" href="${signup_url}">
+           			Approval Request
+           		</a>
+           		<br/>
+                Regards,<br/>
+              	
+              	<div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+			      <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+			        <strong style="text-transform:uppercase;">${object.company_id.name}</strong>
+			      </h3>
+    			</div>
+
+			    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+			      <span style="color: #222; margin-bottom: 5px; display: block; ">
+			          % if object.company_id.street:
+			            ${object.company_id.street}<br/>
+			          % endif
+			          % if object.company_id.street2:
+			            ${object.company_id.street2}<br/>
+			          % endif
+			          % if object.company_id.city or object.company_id.zip:
+			            ${object.company_id.zip} ${object.company_id.city}<br/>
+			          % endif
+			          % if object.company_id.country_id:
+			            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
+			          % endif
+			      </span>
+			    % if object.company_id.phone:
+			      <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+			            Phone:&nbsp; ${object.company_id.phone}
+			      </div>
+			    % endif
+			    % if object.company_id.website:
+			      <div>
+			            Web :&nbsp;<a href="${object.company_id.website}">${object.company_id.website}</a>
+			      </div>
+			    %endif
+			      <p></p>
+			    </div>
+		    	]]>
+	  		</field>
+		</record>
+
+
+		<record id="approval_accept_notification" model="email.template"> 
+			<field name="name">Approval Acceptance E-mail Template</field>
+		    <field name="email_from">${object.company_id.name and object.company_id.email or ''}</field>
+		    <field name = 'subject'>Acceptance of Approval for ${object.document_type} : ${object.document_no}</field>
+		    <field name="email_to">${object.sender_id and object.sender_id.login or ''}</field>
+		    <field name="lang">${object.lang}</field>
+		    <field name="model_id" ref="approvals.model_approval_request"/>
+		    <field name="auto_delete" eval="True"/>
+			<field name="body_html">
+				<![CDATA[
+				 <p>Dear ${(object.sender_id.name)},<br/><br/>
+				  Approval request [${(object.no)}] for [${(object.document_type)} : ${(object.document_no)}] has been granted!<br/></p>
+				  <br/>
+		          
+				
+				
+				You can visit our portal below to see details the document:
+				<br/><br/>
+
+	  			<% set signup_url = object.url %>
+	  			<a style="display:block; width: 150px; height:20px; margin-left: 120px; color: #DDD; font-family: 'Lucida Grande', Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; text-align: center; text-decoration: none !important; line-height: 1; padding: 5px 0px 0px 0px; background-color: #8E0000; border-radius: 5px 5px; background-repeat: repeat no-repeat;" href="${signup_url}">
+           			Approval Request
+           		</a>
+           		<br/>
+                Regards,<br/>
+              	
+              	<div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+			      <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+			        <strong style="text-transform:uppercase;">${object.company_id.name}</strong>
+			      </h3>
+    			</div>
+
+			    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+			      <span style="color: #222; margin-bottom: 5px; display: block; ">
+			          % if object.company_id.street:
+			            ${object.company_id.street}<br/>
+			          % endif
+			          % if object.company_id.street2:
+			            ${object.company_id.street2}<br/>
+			          % endif
+			          % if object.company_id.city or object.company_id.zip:
+			            ${object.company_id.zip} ${object.company_id.city}<br/>
+			          % endif
+			          % if object.company_id.country_id:
+			            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
+			          % endif
+			      </span>
+			    % if object.company_id.phone:
+			      <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+			            Phone:&nbsp; ${object.company_id.phone}
+			      </div>
+			    % endif
+			    % if object.company_id.website:
+			      <div>
+			            Web :&nbsp;<a href="${object.company_id.website}">${object.company_id.website}</a>
+			      </div>
+			    %endif
+			      <p></p>
+			    </div>
+		    	]]>
+	  		</field>
+		</record>
+
+		<record id="approval_modify_notification" model="email.template"> 
+			<field name="name">Approval Modify E-mail Template</field>
+		    <field name="email_from">${object.company_id.name and object.company_id.email or ''}</field>
+		    <field name = 'subject'>Modify request for ${object.document_type} : ${object.document_no}</field>
+		    <field name="email_to">${object.sender_id and object.sender_id.login or ''}</field>
+		    <field name="lang">${object.lang}</field>
+		    <field name="model_id" ref="approvals.model_approval_request"/>
+		    <field name="auto_delete" eval="True"/>
+			<field name="body_html">
+				<![CDATA[
+		        <p>Dear ${(object.sender_id.name)},<br/><br/>
+				  Approval request [${(object.no)}] for [${(object.document_type)} : ${(object.document_no)}] has been sent back to you with a request to modify details as below!<br/></p>
+				  <br/>
+
+				  % for row in object.comment_ids:
+				  	<p><i><b>"${(row.comment)}"</b></i></p>
+				  %endfor
+
+
+			    <br/>
+			    <br/> 
+				
+				
+				You can visit our portal below to see details of the document:
+				<br/><br/>
+
+	  			<% set signup_url = object.url %>
+	  			<a style="display:block; width: 150px; height:20px; margin-left: 120px; color: #DDD; font-family: 'Lucida Grande', Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; text-align: center; text-decoration: none !important; line-height: 1; padding: 5px 0px 0px 0px; background-color: #8E0000; border-radius: 5px 5px; background-repeat: repeat no-repeat;" href="${signup_url}">
+           			Approval Request
+           		</a>
+           		<br/>
+                Regards,<br/>
+              	
+              	<div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+			      <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+			        <strong style="text-transform:uppercase;">${object.company_id.name}</strong>
+			      </h3>
+    			</div>
+
+			    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+			      <span style="color: #222; margin-bottom: 5px; display: block; ">
+			          % if object.company_id.street:
+			            ${object.company_id.street}<br/>
+			          % endif
+			          % if object.company_id.street2:
+			            ${object.company_id.street2}<br/>
+			          % endif
+			          % if object.company_id.city or object.company_id.zip:
+			            ${object.company_id.zip} ${object.company_id.city}<br/>
+			          % endif
+			          % if object.company_id.country_id:
+			            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
+			          % endif
+			      </span>
+			    % if object.company_id.phone:
+			      <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+			            Phone:&nbsp; ${object.company_id.phone}
+			      </div>
+			    % endif
+			    % if object.company_id.website:
+			      <div>
+			            Web :&nbsp;<a href="${object.company_id.website}">${object.company_id.website}</a>
+			      </div>
+			    %endif
+			      <p></p>
+			    </div>
+		    	]]>
+	  		</field>
+		</record>
+
+		<record id="approval_rejection_notification" model="email.template"> 
+			<field name="name">Approval Rejection E-mail Template</field>
+		    <field name="email_from">${object.company_id.name and object.company_id.email or ''}</field>
+		    <field name = 'subject'>Rejectio of request for ${object.document_type} : ${object.document_no}</field>
+		    <field name="email_to">${object.sender_id and object.sender_id.login or ''}</field>
+		    <field name="lang">${object.lang}</field>
+		    <field name="model_id" ref="approvals.model_approval_request"/>
+		    <field name="auto_delete" eval="True"/>
+			<field name="body_html">
+				<![CDATA[
+		        <p>Dear ${(object.sender_id.name)},<br/><br/>
+				  Approval request [${(object.no)}] for [${(object.document_type)} : ${(object.document_no)}] has been rejected. Details of the reasons for rejection are as listed below:<br/></p>
+				  <br/>
+
+				  % for row in object.comment_ids:
+				  	<p><i><b>"${(row.comment)}"</b></i></p>
+				  %endfor
+
+			    <br/>
+			    <br/> 
+				
+				
+				You can visit our portal below to see details of the document:
+				<br/><br/>
+
+	  			<% set signup_url = object.url %>
+	  			<a style="display:block; width: 150px; height:20px; margin-left: 120px; color: #DDD; font-family: 'Lucida Grande', Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold; text-align: center; text-decoration: none !important; line-height: 1; padding: 5px 0px 0px 0px; background-color: #8E0000; border-radius: 5px 5px; background-repeat: repeat no-repeat;" href="${signup_url}">
+           			Approval Request
+           		</a>
+           		<br/>
+                Regards,<br/>
+              	
+              	<div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+			      <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+			        <strong style="text-transform:uppercase;">${object.company_id.name}</strong>
+			      </h3>
+    			</div>
+
+			    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+			      <span style="color: #222; margin-bottom: 5px; display: block; ">
+			          % if object.company_id.street:
+			            ${object.company_id.street}<br/>
+			          % endif
+			          % if object.company_id.street2:
+			            ${object.company_id.street2}<br/>
+			          % endif
+			          % if object.company_id.city or object.company_id.zip:
+			            ${object.company_id.zip} ${object.company_id.city}<br/>
+			          % endif
+			          % if object.company_id.country_id:
+			            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
+			          % endif
+			      </span>
+			    % if object.company_id.phone:
+			      <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+			            Phone:&nbsp; ${object.company_id.phone}
+			      </div>
+			    % endif
+			    % if object.company_id.website:
+			      <div>
+			            Web :&nbsp;<a href="${object.company_id.website}">${object.company_id.website}</a>
+			      </div>
+			    %endif
+			      <p></p>
+			    </div>
+		    	]]>
+	  		</field>
+		</record>
+	</data>
+</openerp>

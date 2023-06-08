@@ -1,0 +1,48 @@
+<openerp>
+	<data>
+		<record id = "activity_loan_approvals" model = "workflow.activity">
+			<field name ="wkf_id" ref = "sacco_loans.sacco_loans_workflow"/>
+			<field name = "name">Loan Approvals</field>
+			<field name="kind">subflow</field>
+            <field name="subflow_id" search="[('name','=','Approvals Workflow')]"/>
+            <field name="action">
+            	mark_as_pending_approval()
+            	match_stage_with_state()
+            	send_approval_request()
+            </field>
+		</record> 
+
+		<record id="trans_loan_approvals2" model="workflow.transition">
+			<field name="act_from" ref="sacco_loans.activity_loan_appraise"/>
+			<field name="act_to" ref="activity_loan_approvals"/>
+			<field name = 'sequence'>5</field>
+			<field name = 'condition'>appraised == True</field>
+		</record>
+
+		<record id="trans_loan_approved2" model="workflow.transition">
+			<field name="act_from" ref="activity_loan_approvals"/>
+			<field name="act_to" ref="sacco_loans.activity_loan_approved"/>
+			<field name = 'signal'>subflow.approved</field>
+		</record> 
+
+		<record id="trans_loan_approved3" model="workflow.transition">
+			<field name="act_from" ref="activity_loan_approvals"/>
+			<field name="act_to" ref="sacco_loans.activity_loan_approved"/>
+			<field name="trigger_model">approval.request</field>
+            <field name="trigger_expr_id">approval_request_get()</field>
+			<field name = 'condition'>test_state()</field> 
+		</record> 
+
+		<record id="trans_loan_rejected2" model="workflow.transition">
+			<field name="act_from" ref="activity_loan_approvals"/>
+			<field name="act_to" ref="sacco_loans.activity_loan_rejected"/>
+			<field name = 'signal'>subflow.rejected</field> 
+		</record>
+
+		<record id="trans_loan_modify" model="workflow.transition">
+			<field name="act_from" ref="activity_loan_approvals"/>
+			<field name="act_to" ref="sacco_loans.activity_loan_start"/>
+			<field name = 'signal'>subflow.modify</field> 
+		</record>
+	</data>
+</openerp>

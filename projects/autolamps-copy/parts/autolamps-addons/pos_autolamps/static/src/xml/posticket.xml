@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="PosTicket">
+        <t t-jquery="tr[t-foreach='orderlines']" t-operation="before">
+            <thead>
+                <th width='50%'>Description</th>
+                <th width='25%'>Quantity</th>
+                <th width='25%'>Amount</th>
+            </thead>
+        </t>
+    </t>
+
+</templates>

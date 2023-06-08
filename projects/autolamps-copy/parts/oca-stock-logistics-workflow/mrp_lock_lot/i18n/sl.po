@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mrp_lock_lot
+#
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016-2017
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-workflow (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-31 02:50+0000\n"
+"PO-Revision-Date: 2017-06-01 06:55+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-stock-logistics-"
+"workflow-8-0/language/sl/)\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+
+#. module: mrp_lock_lot
+#: field:mrp.product.produce.line,allow_locked:0
+msgid "Allow Locked"
+msgstr "Dovoli zaklenjene"
+
+#. module: mrp_lock_lot
+#: field:mrp.product.produce,allow_locked:0
+msgid "Allow locked"
+msgstr "Dovoli zaklenjene"
+
+#. module: mrp_lock_lot
+#: model:ir.model,name:mrp_lock_lot.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Proizvodni nalog"
+
+#. module: mrp_lock_lot
+#: model:ir.model,name:mrp_lock_lot.model_mrp_product_produce
+msgid "Product Produce"
+msgstr "Proizvedi proizvod"
+
+#. module: mrp_lock_lot
+#: model:ir.model,name:mrp_lock_lot.model_mrp_product_produce_line
+msgid "Product Produce Consume lines"
+msgstr "Postavke porabe ob proizvodnji proizvoda"
+
+#. module: mrp_lock_lot
+#: view:mrp.product.produce:mrp_lock_lot.view_mrp_product_produce_wizard_inh_locklot
+msgid ""
+"[('product_id','=',product_id),'|', ('locked', '=', allow_locked), "
+"('locked','=',False)]"
+msgstr ""
+"[('product_id','=',product_id),'|', ('locked', '=', allow_locked), "
+"('locked','=',False)]"

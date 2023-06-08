@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.rule" id="own_user_sales_commission_rule">
+            <field name="name">Sales Commission - see own commission</field>
+            <field name="model_id" ref="model_sales_commission"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+        </record>
+
+        <record model="ir.rule" id="own_user_sales_target_rule">
+            <field name="name">Sales Target - see own target</field>
+            <field name="model_id" ref="model_sales_target"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+        </record>
+
+    </data>
+</openerp>

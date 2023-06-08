@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<openerp>
+    <data>
+        <record id="wk_pos_stock_qtys" model="ir.ui.view">
+            <field name="name">pos.config.product.form</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/group[@string='Hardware Proxy']" position="replace">
+                  <group>
+                    <group string="Hardware Proxy" >
+                            <field name="proxy_ip" />
+                            <field name="iface_print_via_proxy" />
+                            <field name="iface_scan_via_proxy" />
+                            <field name="iface_electronic_scale" />
+                            <field name="iface_cashdrawer" />
+                        </group>
+                    <group string="POS Stock" >
+                       <field name="wk_display_stock" />
+                       <field name="wk_hide_out_of_stock" />
+                       <field name="wk_stock_type" attrs=
+                        "{'invisible':[('wk_display_stock','=',False)]}"/>
+                        <field name="wk_continous_sale" attrs=
+                        "{'invisible':[('wk_display_stock','=',False)]}"/>
+                        <field name="wk_error_msg" attrs="{'invisible':['|',('wk_display_stock','=',False),('wk_continous_sale','=',True)]}"/>
+                        <div attrs="{'invisible':['|',('wk_display_stock','=',False),('wk_continous_sale','=',True)]}">
+                            <b>Allow order when product qty is greater than</b>
+                        </div>
+                        <div>
+                       <field name="wk_deny_val" attrs="{'invisible':['|',('wk_display_stock','=',False),('wk_continous_sale','=',True)]}"/>
+                        </div>
+                    </group>    
+                </group>
+                </xpath>
+            </field> 
+        </record>
+    </data>
+</openerp>

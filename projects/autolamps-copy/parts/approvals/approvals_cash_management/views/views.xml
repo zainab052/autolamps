@@ -1,0 +1,87 @@
+<openerp>
+	<data>
+
+		<record model = 'ir.actions.act_window' id = 'cash_management_approval_request_entries_action'>
+	      <field name = 'name'>Approval Entries</field>
+	      <field name = 'res_model'>approval.request.lines</field>
+	      <field name = 'view_type'>form</field>
+	      <field name = 'view_mode'>tree</field>
+	    </record>
+
+		<record model = 'ir.ui.view' id = 'petty_cash_approvals'>
+			<field name = 'name'>Petty Cash Approvals</field>
+			<field name = 'model'>cash.management.petty.cash.header</field>
+			<field name = 'inherit_id' ref = 'cash_management.cash_management_petty_cash_form'/> 
+			<field name = 'arch' type = 'xml'>
+				<xpath expr="//button[@name='send_for_posting']" position="replace">
+					<button name = 'send_for_approval' type = 'workflow' string = "Confirm" class = 'oe_highlight' attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+					<button name="send_for_posting" type = "workflow" string = "Post"  confirm = "Post Payments?" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['approved'])]}" groups="cash_management.group_cash_management_admin"/>
+				</xpath>
+
+				<xpath expr="//div[@name='buttons']" position="inside">
+					<button name="%(cash_management_approval_request_entries_action)d" class="oe_inline oe_stat_button" type="action" context="{'search_default_document_id':active_id,'search_default_document_type':'petty_cash'}" icon="fa-check">
+						<field name = 'approval_entries' string = "Approvals" widget = 'statinfo'/>
+					</button> 
+				</xpath>
+			</field>
+		</record> 
+
+
+		<record model = 'ir.ui.view' id = 'payment_voucher_approvals'>
+			<field name = 'name'>Payment Voucher Approvals</field>
+			<field name = 'model'>cash.management.payment.header</field>
+			<field name = 'inherit_id' ref = 'cash_management.cash_management_payments_form'/> 
+			<field name = 'arch' type = 'xml'>
+				<xpath expr="//button[@name='send_for_posting']" position="replace">
+					<button name = 'send_for_approval' type = 'workflow' string = "Confirm" class = 'oe_highlight' attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+					<button name="send_for_posting" type = "workflow" string = "Post"  confirm = "Post Payments?" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['approved'])]}"/>
+				</xpath>
+
+				<xpath expr="//div[@name='buttons']" position="inside">
+					<button name="%(cash_management_approval_request_entries_action)d" class="oe_inline oe_stat_button" type="action" context="{'search_default_document_id':active_id,'search_default_document_type':'payment_voucher'}" icon="fa-check">
+						<field name = 'approval_entries' string = "Approvals" widget = 'statinfo'/>
+					</button> 
+				</xpath>
+			</field>
+		</record>
+
+
+		<record model = 'ir.ui.view' id = 'staff_claim_approvals'>
+			<field name = 'name'>Staff Claim Approvals</field>
+			<field name = 'model'>cash.management.staff.claim</field>
+			<field name = 'inherit_id' ref = 'cash_management.cash_management_staff_claim_form'/> 
+			<field name = 'arch' type = 'xml'>
+				<xpath expr="//button[@name='send_for_posting']" position="replace">
+					<button name = 'send_for_approval' type = 'workflow' string = "Confirm" class = 'oe_highlight' attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+					<button name="send_for_posting" type = "workflow" string = "Post"  confirm = "Post Payments?" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['approved'])]}"/>
+				</xpath>
+
+				<xpath expr="//div[@name='buttons']" position="inside">
+					<button name="%(cash_management_approval_request_entries_action)d" class="oe_inline oe_stat_button" type="action" context="{'search_default_document_id':active_id,'search_default_document_type':'claim'}" icon="fa-check">
+						<field name = 'approval_entries' string = "Approvals" widget = 'statinfo'/>
+					</button> 
+				</xpath>
+			</field>
+		</record> 
+
+
+		<record model = 'ir.ui.view' id = 'cash_transfer_approvals'>
+			<field name = 'name'>Cash Transfer Approvals</field>
+			<field name = 'model'>cash.management.bank.transfer.header</field>
+			<field name = 'inherit_id' ref = 'cash_management.cash_management_bank_transfer_form'/> 
+			<field name = 'arch' type = 'xml'>
+				<xpath expr="//button[@name='send_for_posting']" position="replace">
+					<button name = 'send_for_approval' type = 'workflow' string = "Confirm" class = 'oe_highlight' attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+					<button name="send_for_posting" type = "workflow" string = "Post"  confirm = "Transfer Funds?" class="oe_highlight" attrs="{'invisible': [('state', 'not in', ['approved'])]}"/>
+				</xpath>
+
+				<xpath expr="//div[@name='buttons']" position="inside">
+					<button name="%(cash_management_approval_request_entries_action)d" class="oe_inline oe_stat_button" type="action" context="{'search_default_document_id':active_id,'search_default_document_type':'cash_transfer'}" icon="fa-check">
+						<field name = 'approval_entries' string = "Approvals" widget = 'statinfo'/>
+					</button> 
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<openerp>
+	<data>
+		<template id="indexs" inherit_id='point_of_sale.index' name="POS Warehouse Management Style">
+			<xpath expr="//link[@id='pos-stylesheet']" position="after">
+				<link rel="stylesheet" href="/pos_warehouse_management/static/src/css/pos_warehouse_management.css" />
+			</xpath>
+		</template>
+		<template id="assets_backend" inherit_id="point_of_sale.assets_backend">
+			<xpath expr="." position="inside">
+				<script type="text/javascript" src="/pos_warehouse_management/static/src/js/main.js"></script>
+			</xpath>
+		</template>
+	</data>
+</openerp>

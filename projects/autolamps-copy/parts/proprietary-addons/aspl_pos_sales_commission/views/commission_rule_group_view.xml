@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="commission_rule_group_form_view" model="ir.ui.view">
+            <field name="name">commission.rule.group.form</field>
+            <field name="model">commission.rule.group</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <notebook>
+                            <page string="Rules">
+                                <field name="rule_ids">
+                                    <tree>
+                                        <field name="priority"/>
+                                        <field name="apply_on"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="rule_group_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="commission_rule_group_tree_view" model="ir.ui.view">
+            <field name="name">commission.rule.group.tree</field>
+            <field name="model">commission.rule.group</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_commission_rule_group_view" model="ir.actions.act_window">
+            <field name="name">Commission Rule Group</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">commission.rule.group</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_commission_rule_group_view" id="menuitem_commission_rule_group"
+            parent="point_of_sale.menu_point_config_product" name="Commission Rule Group"/>
+
+        <record id="commission_rule_form_view" model="ir.ui.view">
+            <field name="name">commission.rule.form</field>
+            <field name="model">commission.rule</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="apply_on" widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="priority"/>
+                                <field name="start_date" attrs="{'required': [('end_date', '!=', False)]}"/>
+                                <field name="end_date" attrs="{'required': [('start_date', '!=', False)]}"/>
+                                <field name="rule_group_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="min_amount" class="oe_inline"
+                                attrs="{'invisible': [('apply_on', '!=', '3')], 'required': [('apply_on', '=', '3')]}"/>
+                        </group>
+                        <notebook>
+                            <page string="Product(s)" attrs="{'invisible': [('apply_on', '!=', '1')]}">
+                                <field name="product_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="rule_id" invisible="1"/>
+                                        <field name="product_id" required="1" domain="[('available_in_pos', '=', True)]"/>
+                                        <field name="min_criteria" required="1"/>
+                                        <field name="min_value" required="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Categories" attrs="{'invisible': [('apply_on', '!=', '2')]}">
+                                <field name="category_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="rule_id" invisible="1"/>
+                                        <field name="category_id" required="1"/>
+                                        <field name="min_criteria" required="1"/>
+                                        <field name="min_value" required="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Beneficial(s)">
+                                <field name="beneficial_ids">
+                                    <tree editable="bottom">
+                                        <field name="job_id"/>
+                                        <field name="user_ids" widget="many2many_tags" 
+                                            context="{'ctx_job_id': job_id}"/>
+                                        <field name="compute_price_type"/>
+                                        <field name="commission_price" required="1"/>
+                                        <field name="rule_ref_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="commission_rule_tree_view" model="ir.ui.view">
+            <field name="name">commission.rule.tree</field>
+            <field name="model">commission.rule</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="priority"/>
+                    <field name="apply_on"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="rule_group_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>

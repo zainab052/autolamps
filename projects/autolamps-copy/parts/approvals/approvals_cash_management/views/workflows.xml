@@ -1,0 +1,288 @@
+<openerp>
+	<data>
+		<!-- Petty Cash Workflows -->
+		<!-- ==================== -->
+		<record id = "activity_petty_cash_approvals" model = "workflow.activity">
+			<field name ="wkf_id" ref = "cash_management.petty_cash_workflow"/>
+			<field name = "name">Petty Cash Approvals</field>
+			<field name="kind">subflow</field>
+            <field name="subflow_id" search="[('name','=','Approvals Workflow')]"/>
+            <field name="action">
+            	mark_as_pending_approval()
+            	send_approval_request()
+            </field>
+		</record> 
+
+		<record id = 'activity_petty_cash_approved' model = 'workflow.activity'>
+			<field name = 'wkf_id' ref = 'cash_management.petty_cash_workflow'/>
+			<field name = 'name'>Petty Cash Approved</field>
+			<field name = 'kind'>function</field>
+			<field name = 'action'>
+				mark_as_approved()
+			</field>
+		</record>
+
+		<record id = 'activity_petty_cash_rejected' model = 'workflow.activity'>
+			<field name = 'wkf_id' ref = 'cash_management.petty_cash_workflow'/>
+			<field name = "flow_stop">True</field>
+			<field name = 'name'>Petty Cash Rejected</field> 
+			<field name = 'kind'>function</field>
+			<field name = 'action'>
+				mark_as_rejected()
+			</field>
+		</record>
+
+		<record id="trans_petty_cash_approvals" model="workflow.transition">
+			<field name="act_from" ref="cash_management.activity_petty_cash_start"/>
+			<field name="act_to" ref="activity_petty_cash_approvals"/>
+			<field name = 'sequence'>5</field>
+			<field name = 'signal'>send_for_approval</field>
+		</record>
+
+		<record id="trans_petty_cash_approved" model="workflow.transition">
+			<field name="act_from" ref="activity_petty_cash_approvals"/>
+			<field name="act_to" ref="activity_petty_cash_approved"/>
+			<field name = 'signal'>subflow.approved</field>
+		</record> 
+
+		<record id="trans_petty_cash_approved2" model="workflow.transition">
+			<field name="act_from" ref="activity_petty_cash_approvals"/>
+			<field name="act_to" ref="activity_petty_cash_approved"/>
+			<field name="trigger_model">approval.request</field>
+            <field name="trigger_expr_id">approval_request_get()</field>
+			<field name = 'condition'>test_state()</field> 
+		</record> 
+
+		<record id="trans_petty_cash_modify" model="workflow.transition">
+			<field name="act_from" ref="activity_petty_cash_approvals"/>
+			<field name="act_to" ref="cash_management.activity_petty_cash_start"/>
+			<field name = 'signal'>subflow.modify</field>
+		</record> 
+
+		<record id="trans_petty_cash_rejected" model="workflow.transition">
+			<field name="act_from" ref="activity_petty_cash_approvals"/>
+			<field name="act_to" ref="activity_petty_cash_rejected"/>
+			<field name = 'signal'>subflow.rejected</field>
+		</record> 
+
+		<record id="trans_petty_cash_post2" model="workflow.transition">
+			<field name="act_from" ref="activity_petty_cash_approved"/>
+			<field name="act_to" ref="cash_management.activity_petty_cash_complete"/>
+			<field name = 'signal'>send_for_posting</field>
+		</record> 
+
+		<!-- Payment Voucher Workflows -->
+		<!-- ========================= -->
+		<record id = "activity_payment_voucher_approvals" model = "workflow.activity">
+			<field name ="wkf_id" ref = "cash_management.payment_voucher_workflow"/>
+			<field name = "name">Payment Voucher Approvals</field>
+			<field name="kind">subflow</field>
+            <field name="subflow_id" search="[('name','=','Approvals Workflow')]"/>
+            <field name="action">
+            	mark_as_pending_approval()
+            	send_approval_request()
+            </field>
+		</record> 
+
+		<record id = 'activity_payment_voucher_approved' model = 'workflow.activity'>
+			<field name = 'wkf_id' ref = 'cash_management.payment_voucher_workflow'/>
+			<field name = 'name'>Payment Voucher Approved</field>
+			<field name = 'kind'>function</field>
+			<field name = 'action'>
+				mark_as_approved()
+			</field>
+		</record>
+
+		<record id = 'activity_payment_voucher_rejected' model = 'workflow.activity'>
+			<field name = 'wkf_id' ref = 'cash_management.payment_voucher_workflow'/>
+			<field name = "flow_stop">True</field>
+			<field name = 'name'>Payment Voucher Rejected</field> 
+			<field name = 'kind'>function</field>
+			<field name = 'action'>
+				mark_as_rejected()
+			</field>
+		</record>
+
+		<record id="trans_payment_voucher_approvals" model="workflow.transition">
+			<field name="act_from" ref="cash_management.activity_payment_voucher_start"/>
+			<field name="act_to" ref="activity_payment_voucher_approvals"/>
+			<field name = 'sequence'>5</field>
+			<field name = 'signal'>send_for_approval</field>
+		</record>
+
+		<record id="trans_payment_voucher_approved" model="workflow.transition">
+			<field name="act_from" ref="activity_payment_voucher_approvals"/>
+			<field name="act_to" ref="activity_payment_voucher_approved"/>
+			<field name = 'signal'>subflow.approved</field>
+		</record> 
+
+		<record id="trans_payment_voucher_approved2" model="workflow.transition">
+			<field name="act_from" ref="activity_payment_voucher_approvals"/>
+			<field name="act_to" ref="activity_payment_voucher_approved"/>
+			<field name="trigger_model">approval.request</field>
+            <field name="trigger_expr_id">approval_request_get()</field>
+			<field name = 'condition'>test_state()</field> 
+		</record> 
+
+		<record id="trans_payment_voucher_modify" model="workflow.transition">
+			<field name="act_from" ref="activity_payment_voucher_approvals"/>
+			<field name="act_to" ref="cash_management.activity_payment_voucher_start"/>
+			<field name = 'signal'>subflow.modify</field>
+		</record> 
+
+		<record id="trans_payment_voucher_rejected" model="workflow.transition">
+			<field name="act_from" ref="activity_payment_voucher_approvals"/>
+			<field name="act_to" ref="activity_payment_voucher_rejected"/>
+			<field name = 'signal'>subflow.rejected</field>
+		</record> 
+
+		<record id="trans_payment_voucher_post2" model="workflow.transition">
+			<field name="act_from" ref="activity_payment_voucher_approved"/>
+			<field name="act_to" ref="cash_management.activity_payment_voucher_complete"/>
+			<field name = 'signal'>send_for_posting</field>
+		</record> 
+
+		<!-- Staff Claim Workflows -->
+		<!-- ========================= -->
+		<record id = "activity_staff_claim_approvals" model = "workflow.activity">
+			<field name ="wkf_id" ref = "cash_management.staff_claim_workflow"/>
+			<field name = "name">Staff Claim Approvals</field>
+			<field name="kind">subflow</field>
+            <field name="subflow_id" search="[('name','=','Approvals Workflow')]"/>
+            <field name="action">
+            	mark_as_pending_approval()
+            	send_approval_request()
+            </field>
+		</record> 
+
+		<record id = 'activity_staff_claim_approved' model = 'workflow.activity'>
+			<field name = 'wkf_id' ref = 'cash_management.staff_claim_workflow'/>
+			<field name = 'name'>Staff Claim Approved</field>
+			<field name = 'kind'>function</field>
+			<field name = 'action'>
+				mark_as_approved()
+			</field>
+		</record>
+
+		<record id = 'activity_staff_claim_rejected' model = 'workflow.activity'>
+			<field name = 'wkf_id' ref = 'cash_management.staff_claim_workflow'/>
+			<field name = "flow_stop">True</field>
+			<field name = 'name'>Staff Claim Rejected</field> 
+			<field name = 'kind'>function</field>
+			<field name = 'action'>
+				mark_as_rejected()
+			</field>
+		</record>
+
+		<record id="trans_staff_claim_approvals" model="workflow.transition">
+			<field name="act_from" ref="cash_management.activity_staff_claim_start"/>
+			<field name="act_to" ref="activity_staff_claim_approvals"/>
+			<field name = 'sequence'>5</field>
+			<field name = 'signal'>send_for_approval</field>
+		</record>
+
+		<record id="trans_staff_claim_approved" model="workflow.transition">
+			<field name="act_from" ref="activity_staff_claim_approvals"/>
+			<field name="act_to" ref="activity_staff_claim_approved"/>
+			<field name = 'signal'>subflow.approved</field>
+		</record> 
+
+		<record id="trans_staff_claim_approved2" model="workflow.transition">
+			<field name="act_from" ref="activity_staff_claim_approvals"/>
+			<field name="act_to" ref="activity_staff_claim_approved"/>
+			<field name="trigger_model">approval.request</field>
+            <field name="trigger_expr_id">approval_request_get()</field>
+			<field name = 'condition'>test_state()</field> 
+		</record> 
+
+		<record id="trans_staff_claim_modify" model="workflow.transition">
+			<field name="act_from" ref="activity_staff_claim_approvals"/>
+			<field name="act_to" ref="cash_management.activity_staff_claim_start"/>
+			<field name = 'signal'>subflow.modify</field>
+		</record> 
+
+		<record id="trans_staff_claim_rejected" model="workflow.transition">
+			<field name="act_from" ref="activity_staff_claim_approvals"/>
+			<field name="act_to" ref="activity_staff_claim_rejected"/>
+			<field name = 'signal'>subflow.rejected</field>
+		</record> 
+
+		<record id="trans_staff_claim_post2" model="workflow.transition">
+			<field name="act_from" ref="activity_staff_claim_approved"/>
+			<field name="act_to" ref="cash_management.activity_staff_claim_open"/>
+			<field name = 'signal'>send_for_posting</field> 
+		</record> 
+
+		<!-- Cash Transfer Workflows -->
+		<!-- ==================== -->
+		<record id = "activity_cash_transfer_approvals" model = "workflow.activity">
+			<field name ="wkf_id" ref = "cash_management.cash_transfer_workflow"/>
+			<field name = "name">Cash Transfer Approvals</field>
+			<field name="kind">subflow</field>
+            <field name="subflow_id" search="[('name','=','Approvals Workflow')]"/>
+            <field name="action">
+            	mark_as_pending_approval()
+            	send_approval_request()
+            </field>
+		</record> 
+
+		<record id = 'activity_cash_transfer_approved' model = 'workflow.activity'>
+			<field name = 'wkf_id' ref = 'cash_management.cash_transfer_workflow'/>
+			<field name = 'name'>Cash Transfer Approved</field>
+			<field name = 'kind'>function</field>
+			<field name = 'action'>
+				mark_as_approved()
+			</field>
+		</record>
+
+		<record id = 'activity_cash_transfer_rejected' model = 'workflow.activity'>
+			<field name = 'wkf_id' ref = 'cash_management.cash_transfer_workflow'/>
+			<field name = "flow_stop">True</field>
+			<field name = 'name'>Petty Cash Rejected</field> 
+			<field name = 'kind'>function</field>
+			<field name = 'action'>
+				mark_as_rejected()
+			</field>
+		</record>
+
+		<record id="trans_cash_transfer_approvals" model="workflow.transition">
+			<field name="act_from" ref="cash_management.activity_cash_transfer_start"/>
+			<field name="act_to" ref="activity_cash_transfer_approvals"/>
+			<field name = 'sequence'>5</field>
+			<field name = 'signal'>send_for_approval</field>
+		</record>
+
+		<record id="trans_cash_transfer_approved" model="workflow.transition">
+			<field name="act_from" ref="activity_cash_transfer_approvals"/>
+			<field name="act_to" ref="activity_cash_transfer_approved"/>
+			<field name = 'signal'>subflow.approved</field>
+		</record> 
+
+		<record id="trans_cash_transfer_approved2" model="workflow.transition">
+			<field name="act_from" ref="activity_cash_transfer_approvals"/>
+			<field name="act_to" ref="activity_cash_transfer_approved"/>
+			<field name="trigger_model">approval.request</field>
+            <field name="trigger_expr_id">approval_request_get()</field>
+			<field name = 'condition'>test_state()</field> 
+		</record> 
+
+		<record id="trans_cash_transfer_modify" model="workflow.transition">
+			<field name="act_from" ref="activity_cash_transfer_approvals"/>
+			<field name="act_to" ref="cash_management.activity_cash_transfer_start"/>
+			<field name = 'signal'>subflow.modify</field>
+		</record> 
+
+		<record id="trans_cash_transfer_rejected" model="workflow.transition">
+			<field name="act_from" ref="activity_cash_transfer_approvals"/>
+			<field name="act_to" ref="activity_cash_transfer_rejected"/>
+			<field name = 'signal'>subflow.rejected</field>
+		</record> 
+
+		<record id="trans_cash_transfer_post2" model="workflow.transition">
+			<field name="act_from" ref="activity_cash_transfer_approved"/>
+			<field name="act_to" ref="cash_management.activity_cash_transfer_complete"/>
+			<field name = 'signal'>send_for_posting</field>
+		</record> 
+
+	</data>
+</openerp>

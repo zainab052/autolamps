@@ -1,0 +1,34 @@
+<openerp>
+	<data>
+		<record model = 'ir.actions.act_window' id = 'loan_approval_request_entries_action'>
+			<field name = 'name'>Loan Approval Request Entries</field>
+			<field name = 'res_model'>approval.request.lines</field>
+			<field name = 'view_type'>form</field>
+			<field name = 'view_mode'>tree,form</field>
+		</record>
+
+		<record model = 'ir.ui.view' id = 'sacco_loan_application_approvals'>
+			<field name = 'name'>Loan Approvals</field>
+			<field name = 'model'>sacco.loan</field>
+			<field name = 'inherit_id' ref = 'sacco_loans.loans_form_view'/>
+			<field name = 'arch' type = 'xml'>
+				<xpath expr="//div[@name='buttons']" position="inside">
+					<button name="%(loan_approval_request_entries_action)d" class="oe_inline oe_stat_button" type="action" context="{'search_default_document_id':active_id,'search_default_document_type':'loan'}" icon="fa-check">
+						<field name = 'approval_entries' string = "Approvals" widget = 'statinfo'/>
+					</button> 
+				</xpath>
+			</field>
+		</record>
+
+		<record model = 'ir.ui.view' id = 'sacco_loan_product_types_approvals'>
+			<field name = 'name'>Loan Product Types Approvals</field>
+			<field name = 'model'>sacco.loan.types</field>
+			<field name = 'inherit_id' ref = 'sacco_loans.loan_types_form_view'/>
+			<field name = 'arch' type = 'xml'>
+				<xpath expr="//field[@name='approval_type']" position="replace">
+					<field name = 'approval_group_id'/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

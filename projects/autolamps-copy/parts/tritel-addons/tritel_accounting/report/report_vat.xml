@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="vat_xlsx"
+            model="account.move.line"
+            string="VAT Input/Output Excel"
+            report_type="xlsx"
+            name="vat.xlsx"
+            file="vat.xlsx"
+            attachment_use="False"
+        />
+    </data>
+</openerp>

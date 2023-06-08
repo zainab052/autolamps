@@ -1,0 +1,158 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * sale_comment_propagation
+#
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-25 03:01+0000\n"
+"PO-Revision-Date: 2017-07-25 03:01+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: sale_comment_propagation
+#: view:account.invoice:sale_comment_propagation.account_invoice_comments_form
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+#: view:sale.order:sale_comment_propagation.sale_order_comments_form
+#: view:stock.picking:sale_comment_propagation.stock_picking_comments_form
+msgid "Comments"
+msgstr "Bemerkungen"
+
+#. module: sale_comment_propagation
+#: field:res.partner,invoice_comment:0
+msgid "Comments for invoices"
+msgstr "Vermerke zu Rechnungen"
+
+#. module: sale_comment_propagation
+#: field:res.partner,picking_comment:0
+msgid "Comments for pickings"
+msgstr "Vermerke zu Kommissionen"
+
+#. module: sale_comment_propagation
+#: field:res.partner,sale_comment:0
+msgid "Comments for sale orders"
+msgstr "Vermerke zu Verkaufsaufträgen"
+
+#. module: sale_comment_propagation
+#: view:account.invoice:sale_comment_propagation.account_invoice_comments_form
+#: view:sale.order:sale_comment_propagation.sale_order_comments_form
+#: view:stock.picking:sale_comment_propagation.stock_picking_comments_form
+msgid "Customer observations"
+msgstr "Kundenfeststellungen"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Internal comment displayed on customer invoices"
+msgstr "Interner Vermerk, der auf Kundenrechnungen erscheint"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Internal comment displayed on delivery orders"
+msgstr "Interner Vermerk, auf Lieferscheinen angezeigt"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Internal comment displayed on delivery orders (it will be propagated)"
+msgstr "Interner Vermerk, auf Lieferaufträgen angezeigt (wird fortgeschrieben)"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Internal comment displayed on sale orders"
+msgstr "Interner Vermerk, auf Verkaufsaufträgen angezeigt"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Internal comment displayed on sale orders (it will be propagated)"
+msgstr ""
+"Interner Vermerk, angezeigt auf Verkaufsaufträgen (wird fortgeschrieben)"
+
+#. module: sale_comment_propagation
+#: field:account.invoice,sale_comment:0 field:sale.order,comment:0
+#: field:stock.picking,sale_comment:0
+msgid "Internal comments"
+msgstr "Interne Vermerke"
+
+#. module: sale_comment_propagation
+#: view:sale.order:sale_comment_propagation.sale_order_comments_form
+#: view:stock.picking:sale_comment_propagation.stock_picking_comments_form
+msgid "Internal customer notes (it will be propagated), see in partner..."
+msgstr "Interne Kundenvermerke (werden fortgeschrieben), siehe Partner..."
+
+#. module: sale_comment_propagation
+#: view:account.invoice:sale_comment_propagation.account_invoice_comments_form
+#: view:sale.order:sale_comment_propagation.sale_order_comments_form
+#: view:stock.picking:sale_comment_propagation.stock_picking_comments_form
+msgid "Internal customer notes, see in partner..."
+msgstr "Interne Kundenvermerke, siehe Partner..."
+
+#. module: sale_comment_propagation
+#: model:ir.model,name:sale_comment_propagation.model_account_invoice
+msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Invoices"
+msgstr "Rechnungen"
+
+#. module: sale_comment_propagation
+#: model:ir.model,name:sale_comment_propagation.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: sale_comment_propagation
+#: model:ir.model,name:sale_comment_propagation.model_stock_picking
+msgid "Picking List"
+msgstr "Pickliste"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Pickings"
+msgstr "Kommissionen"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+#: view:sale.order:sale_comment_propagation.sale_order_comments_form
+#: view:stock.picking:sale_comment_propagation.stock_picking_comments_form
+msgid "Propagated comments"
+msgstr "Fortgeschriebene Vermerke"
+
+#. module: sale_comment_propagation
+#: field:res.partner,picking_propagated_comment:0
+msgid "Propagated comments for pickings"
+msgstr "Fortgeschriebene Vermerke zu Kommissionierungen"
+
+#. module: sale_comment_propagation
+#: field:res.partner,sale_propagated_comment:0
+msgid "Propagated comments for sale orders"
+msgstr "Fortgeschriebene Vermerke zu Verkaufsaufträgen"
+
+#. module: sale_comment_propagation
+#: field:sale.order,propagated_comment:0
+#: field:stock.picking,sale_propagated_comment:0
+msgid "Propagated internal comments"
+msgstr "Fortgeschriebene interne Vermerke"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Sale Orders"
+msgstr "Verkaufsaufträge"
+
+#. module: sale_comment_propagation
+#: view:res.partner:sale_comment_propagation.res_partner_comments_form
+msgid "Sale observations"
+msgstr "Verkaufsfeststellungen"
+
+#. module: sale_comment_propagation
+#: model:ir.model,name:sale_comment_propagation.model_sale_order
+msgid "Sales Order"
+msgstr "Verkaufsauftrag"

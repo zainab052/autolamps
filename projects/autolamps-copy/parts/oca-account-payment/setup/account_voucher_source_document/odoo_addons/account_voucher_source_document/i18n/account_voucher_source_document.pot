@@ -1,0 +1,30 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_voucher_source_document
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_voucher_source_document
+#: model:ir.model,name:account_voucher_source_document.model_account_voucher
+msgid "Accounting Voucher"
+msgstr ""
+
+#. module: account_voucher_source_document
+#: field:account.voucher.line,document_source:0
+msgid "Document source"
+msgstr ""
+
+#. module: account_voucher_source_document
+#: model:ir.model,name:account_voucher_source_document.model_account_voucher_line
+msgid "Voucher Lines"
+msgstr ""
+

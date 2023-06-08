@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report 
+            id="account_invoices_commissions"
+            model="account.invoice"
+            string="Invoice Commissions Report"
+            report_type="qweb-pdf"
+            name="tritel_commission.report_invoice_commissions"
+            file="tritel_commission.report_invoice_commissions"
+            attachment_use="True"
+            attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        />
+
+        <report 
+            id="report_sale_commission_settlement_action"
+            string="Commission Settlement Report"
+            model="sale.commission.settlement" 
+            report_type="qweb-pdf"
+            file="tritel_commission.report_sale_commission_settlement" 
+            name="tritel_commission.report_sale_commission_settlement" 
+        />
+
+        <report 
+            id="report_sale_commission_settlement_invoice_action"
+            string="Commission Settlement Invoice Report"
+            model="sale.commission.settlement" 
+            report_type="qweb-pdf"
+            file="tritel_commission.report_sale_commission_settlement_invoice" 
+            name="tritel_commission.report_sale_commission_settlement_invoice" 
+        />
+
+        <report 
+            id="report_sale_order_commissions"
+            string="Sale Commissions Report"
+            model="sale.order" 
+            report_type="qweb-pdf"
+            file="tritel_commission.report_saleorder_commissions" 
+            name="tritel_commission.report_saleorder_commissions" 
+        />
+
+        <report 
+            id="report_agent_commission_summary" 
+            model="agent.commission.report" 
+            string="Agent Commissions Report"
+            report_type="qweb-pdf"
+            name="tritel_commission.report_agent_commission" 
+            file="tritel_commission.report_agent_commission"
+        />
+
+        <report 
+            id="report_settlement_commission_summary" 
+            model="settlement.summary.wizard" 
+            string="Settlement Summary"
+            report_type="qweb-pdf"
+            name="tritel_commission.report_settlement_summary" 
+            file="tritel_commission.report_settlement_summary"
+        />
+    </data>
+</openerp>

@@ -1,0 +1,123 @@
+<section class="oe_container">
+    <div>
+        <div class="text-center">
+            <a target="new" href="http://www.acespritech.com">
+                <img src="ace_logo.png">
+            </a>
+        </div>
+    </div>
+</section>
+<br/>
+<section class="oe_container oe_dark">
+    <div class="oe_row">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Odoo 8 POS Sales Commission</h2>
+            <h3 class="oe_slogan">This module allows to give commission to Sales Person.</h3>
+            <h3>
+                Features
+            </h3>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Easy To Manage POS Sales Commission.</li>
+                <li style="color:#30054D;font-weight:bold;">Give commission to Sales Person.</li>
+                <li style="color:#30054D;font-weight:bold;">Commission calculation based on Product, Product category and POS order</li>
+                <li style="color:#30054D;font-weight:bold;">Manage Sales target of sales person to calculate commission.</li>
+                <li style="color:#30054D;font-weight:bold;">Override sales target of sales person to give commission facility.</li>
+                <li style="color:#30054D;font-weight:bold;">Manage the commission payment via Salary or Invoice.</li>
+            </ul>
+            <h4 class="oe_slogan">How to use</h4>
+            <div class="oe_screenshot" style="text-align: left;">
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">In Invoicing settings, under the POS sales commission, set the option for "Commission Pay by" to Invoice/Salary. Based on this configuration the commission is paid and set Commission Account so when company pay the commission, At that time commission pay from selected account..</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_1_account_setting.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">In "Commission Rule Group" menu, from where you can create commission rule groups.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_2_commission_rule.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Under the commission rule group, you can create diffrent rule for based on what the commission will calculate like product, product category or pos order. User can also set the time duration for how much time the rule will applicable and based on the rule priority and time duration, rule will apply for the calculation.</li>
+            </ul>
+            <img style="max-width: 100%;" src="main_screenshot.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Into Rules, you can set the commission beneficial(s).</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_3_commission_beneficial.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Into Point of sale configuration form view, need to set "commission rule group", so that commission rule group will apply while calculating the commission.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_4_pos_config.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">For calculate commission for pos order,one scheduler will execute everyday and calculate commission based on pos session, commission pay by and commission rule group.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_5_pos_order.png">
+            <img style="max-width: 100%;" src="odoo8_6_pos_order_commission.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Under Sales commission-->Commission menu will show you all commission details.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_7_sales_commission.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">From Sales Target menu, you can define sales person's sales target.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_8_sales_target.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Commission Payment menu you can generate the vendor bill for pay the commission through Invoice. Also one scheduler named 'Generate Invoice - POS Commission' is available that will execute automatically and generate the vendor bill into draft state.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_9_commission_payment.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Here below is the Vendor bill which is generate from the Commission.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_10_commission_invoice.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">When module is install, into salary rule, you get new salary rule for pay the commission by Salary.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_11_pos_commission_salary_rule.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Add this new salary rule to Salary structure, so when employee payslip is create at that time employee related user's commission amount is added into employee's salary amount.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_12_salary_structure.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">When the employee salary slip is generate, it will automatically added the commission amount and when confirm payslip, employee related user's commission set to 'Paid'.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_13_payslip.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Click "Print Commission summary" menu, into pop-up, select the available options and click print button for printing the commission report.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_14_wizard_print_report.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Here below is the user wise commission report.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_15_commission_report.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">From Employee, Click on commission button to see the commission graph of that employee. This same button is also available into the Sales Target.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_16_employee_graph.png"><br/><br/>
+            <ul>
+                <li style="color:#30054D;font-weight:bold;">Here below is the commission graph from where user can see the detail like User sales amount, Commission amount.</li>
+            </ul>
+            <img style="max-width: 100%;" src="odoo8_17_sales_commission_graph.png"><br/><br/>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="oe_container">
+    <div class="oe_row" style="background-color: #008000;">
+        <div style="margin-bottom:10px;" class="oe_slogan text-center">
+            <div class="oe_span12">
+                <h3 class="text-center" style="color:#FFFFFF; font-size:20px"><b>NOTE:</b> We give 60 days support for our customers. Before trying in your live db, please ask us to provide you for test link. If any other custom modules are installed and because of that some errors occurs then we charge extra.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="oe_row" style="background-color: #004CFF;">
+        <div style="margin-bottom:10px;" class="oe_slogan text-center">
+            <div class="oe_span12">
+            <h3 class="text-center" style="color:#FFFFFF; font-size:20px">Contact us for support, query, customization</h3>
+        </div>
+            <span>
+                <a target="new" href="http://www.acespritech.com" style="color: yellow !important;font-weight:bold;">Website</a> | 
+                <a target="new" href="http://www.acespritechblog.com" style="color: yellow !important;font-weight:bold;">Blog</a> | 
+                <a href="mailto:info@acespritech.com" style="color: yellow !important;font-weight:bold;">Email us</a>
+               | <a style="color: yellow !important;font-weight:bold;">Skype: acespritech</a>
+            </span>
+        </div>
+    </div>
+</section>

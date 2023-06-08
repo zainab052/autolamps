@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+
+<record id="view_stock_prodlot_selection" model="ir.ui.view">
+    <field name="name">stock.prodlot.selection</field>
+    <field name="model">stock.prodlot.selection</field>
+    <field name="arch" type="xml">
+        <form string="Select or Create Production Lots">
+            <group name="common">
+                <field name="product_id" />
+                <field name="create_prodlots"/>
+            </group>
+            <group name="from_interval" string="From Interval">
+                <field name="prefix"/>
+                <field name="first_number"/>
+                <field name="last_number"/>
+                <field name="suffix"/>
+                <button type="object" name="select_or_create_prodlots_from_interval" string="Run From Interval" class="oe_highlight"/>
+            </group>
+            <group name="from_file" string="From File">
+                <field name="prodlot_file"/>
+                <button type="object" name="select_or_create_prodlots_from_file" string="Run From File" class="oe_highlight"/>
+            </group>
+            <footer>
+                <button string="Cancel" name="cancel" type="object" class="oe_link"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+
+<record id="action_prodlot_selection" model="ir.actions.act_window">
+    <field name="name">Select or Create Serial Numbers</field>
+    <field name="res_model">stock.prodlot.selection</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+<record id="view_stock_enter_transfer_details" model="ir.ui.view">
+    <field name="name">product_serial.stock.transfer_details.form</field>
+    <field name="model">stock.transfer_details</field>
+    <field name="inherit_id" ref="stock.view_stock_enter_transfer_details"/>
+    <field name="arch" type="xml">
+        <field name="picking_destination_location_id" position="after">
+            <group name="prodlot_wizard">
+                <button type="action" name="%(action_prodlot_selection)d" string="Spread Serial Numbers"/>
+            </group>
+        </field>
+    </field>
+</record>
+
+</data>
+</openerp>

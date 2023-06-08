@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+	<t t-extend="OutOfStockMessagePopup">
+		<t t-jquery=".button.cancel" t-operation="before">
+			<div class="button show_other_stocks" style="width:130px">
+				Check Availability
+			</div>
+		</t>
+	</t>
+
+	<t t-name="NoRelatedStockLocationPopup">
+        <div class="modal-dialog">
+            <div class="popup popup-textinput" style="height:260px !important">
+                <p class="title" style="width:92%">
+                   No Related Stock Location Available
+                </p>
+                <p class="body">
+                    Please select related stock locations in POS backend Configuration.
+                </p>
+                <div class="footer">
+                    <div class="button cancel" style="width:130px">
+                        OK
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+	<t t-name="ProductStockPopup">
+		<div class="modal-dialog">
+			<div class="popup popup-textinput" style="width:700px;height:400px">
+				<div class='title' style="margin-bottom:0px">
+					Product (
+					<t t-if="widget.options">
+						<t t-esc = "widget.options.product_info[1]"/>
+					</t>)
+				</div>
+				<div class="subwindow-container-fix" style="height:210px;width:97%;margin-left:2%;">
+					<table class="product_stock" style="text-align:left;background:#e4e2e2" >
+						<tr>
+							<th style="width:76%">Stock Location</th>
+							<th>Available Quantity</th>				
+						</tr>
+					</table>
+					<div class="subwindow-container-fix touch-scrollable scrollable-y" style="height:88%;">
+						<table class="product_stock" style="text-align:left;" >
+							<t t-if="widget.options">
+								<t t-foreach="widget.pos.config.related_stock_location_ids" t-as="location_id">
+									<t t-if="widget.options.stock_info[location_id][0] > 0">
+										<tr class="stock_line" t-att-data-line-id="location_id">		
+											<td ><t t-esc="widget.options.stock_info[location_id][2]"/></td>
+											<td class="available_qty"><t t-esc="widget.options.stock_info[location_id][0]"/></td>
+										</tr>
+									</t>
+								</t>					
+							</t>
+						</table>
+					</div>		
+				</div>
+				<div class="product_quantity">
+					<table class="product_qty">
+						<tr>
+							<th> Quantity </th>
+							<td> <input id="qty_input" type="number" value="0"></input> </td>
+						</tr>
+					</table>
+				</div>
+				<div class="footer">
+					<div  class="button apply">
+						Apply
+					</div>
+					<div  class="button cancel">
+						Cancel
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+</templates>

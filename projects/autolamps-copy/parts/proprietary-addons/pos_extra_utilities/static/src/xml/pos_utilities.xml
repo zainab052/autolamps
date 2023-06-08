@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+	<t t-name="PriceUpdatePopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-textinput">
+				<div class='title'>
+					CHANGE PRICE
+				</div>
+				<div>
+					<table id="target_line" width="80%" style='margin-left: 25%;margin-right:7%;margin-top: 10%;'>
+						<tr style='text-align:left'>
+							<th>
+								<b>Product</b>
+							</th>
+							<th>
+								<b>PRICE</b>
+							</th>
+						</tr>
+						<tr style='font-size:16px;text-align:left'>
+							<td id='selected_product_name' style='padding-top:5%'>
+							</td>
+							<td style='padding-top:5%'>
+								<textarea id='price_input' rows='1' cols='7' style='resize: none;float: left;margin-top: 3%;overflow: hidden;'></textarea>
+							</td>
+						</tr>
+					</table>
+
+					<div id='price_error' style='color: rgb(159, 96, 0); float: none; margin-top: 7%;font-size: smaller; height: 28px; padding-top: 2.3%; text-align: justify; background-color: rgb(254, 239, 179);display:none;'>
+					</div>
+				</div>
+				
+				<div class="footer">
+					<div id='wk_ok' class="button">
+						Ok
+					</div>
+					<div id='wk_cancel' class="button cancel">
+						Cancel
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+</templates>

@@ -1,0 +1,143 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_picking_compute_delivery_date
+#
+# Translators:
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: stock-logistics-workflow (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-04 08:41+0000\n"
+"PO-Revision-Date: 2017-03-08 13:47+0000\n"
+"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-stock-logistics-"
+"workflow-8-0/language/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: stock_picking_compute_delivery_date
+#: view:compute.all.delivery.dates.wizard:stock_picking_compute_delivery_date.compute_all_delivery_dates_form
+#: view:compute.delivery.date.by.product.wizard:stock_picking_compute_delivery_date.compute_delivery_date_by_product_form
+msgid "Cancel"
+msgstr "Annulé"
+
+#. module: stock_picking_compute_delivery_date
+#: view:compute.all.delivery.dates.wizard:stock_picking_compute_delivery_date.compute_all_delivery_dates_form
+#: view:compute.delivery.date.by.product.wizard:stock_picking_compute_delivery_date.compute_delivery_date_by_product_form
+msgid "Compute"
+msgstr "Calculer"
+
+#. module: stock_picking_compute_delivery_date
+#: view:compute.all.delivery.dates.wizard:stock_picking_compute_delivery_date.compute_all_delivery_dates_form
+msgid "Compute All Delivery Dates"
+msgstr "Calculer toutes les dates de livraisons"
+
+#. module: stock_picking_compute_delivery_date
+#: view:compute.delivery.date.by.product.wizard:stock_picking_compute_delivery_date.compute_delivery_date_by_product_form
+msgid "Compute Delivery Dates"
+msgstr "Calculer les dates de livraisons"
+
+#. module: stock_picking_compute_delivery_date
+#: model:ir.ui.menu,name:stock_picking_compute_delivery_date.product_compute_all_delivery_dates_menu
+msgid "Compute all delivery dates"
+msgstr "Calculer toutes les dates de livraisons"
+
+#. module: stock_picking_compute_delivery_date
+#: model:ir.actions.act_window,name:stock_picking_compute_delivery_date.product_compute_all_delivery_dates_action
+msgid "Compute delivery dates for all products"
+msgstr "Calculer les dates de livraisons de tous les produits"
+
+#. module: stock_picking_compute_delivery_date
+#: model:ir.actions.act_window,name:stock_picking_compute_delivery_date.product_compute_delivery_date_wizard_action
+msgid "Compute delivery dates for product"
+msgstr "Calculer les dates de livraisons de produit"
+
+#. module: stock_picking_compute_delivery_date
+#: field:compute.all.delivery.dates.wizard,create_uid:0
+#: field:compute.delivery.date.by.product.wizard,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: stock_picking_compute_delivery_date
+#: field:compute.all.delivery.dates.wizard,create_date:0
+#: field:compute.delivery.date.by.product.wizard,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: stock_picking_compute_delivery_date
+#: field:compute.all.delivery.dates.wizard,display_name:0
+#: field:compute.delivery.date.by.product.wizard,display_name:0
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: stock_picking_compute_delivery_date
+#: field:compute.all.delivery.dates.wizard,id:0
+#: field:compute.delivery.date.by.product.wizard,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_picking_compute_delivery_date
+#: field:compute.all.delivery.dates.wizard,__last_update:0
+#: field:compute.delivery.date.by.product.wizard,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: stock_picking_compute_delivery_date
+#: field:compute.all.delivery.dates.wizard,write_uid:0
+#: field:compute.delivery.date.by.product.wizard,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: stock_picking_compute_delivery_date
+#: field:compute.all.delivery.dates.wizard,write_date:0
+#: field:compute.delivery.date.by.product.wizard,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: stock_picking_compute_delivery_date
+#: model:ir.model,name:stock_picking_compute_delivery_date.model_stock_picking
+msgid "Picking List"
+msgstr "Bon de livraison"
+
+#. module: stock_picking_compute_delivery_date
+#: code:addons/stock_picking_compute_delivery_date/model/picking.py:112
+#: code:addons/stock_picking_compute_delivery_date/model/picking.py:149
+#, python-format
+msgid "Scheduled date update to %s from %s"
+msgstr "Planifier la date de mise à jour de %s à %s"
+
+#. module: stock_picking_compute_delivery_date
+#: view:compute.all.delivery.dates.wizard:stock_picking_compute_delivery_date.compute_all_delivery_dates_form
+msgid ""
+"This will recompute the delivery dates of all outgoing moves for all "
+"products. For Make To Stock products, the computation is based on the "
+"available stock and the expected dates of all moves of the same product. For "
+"Make To Order products, it is based on the date of the corresponding "
+"incoming move."
+msgstr ""
+
+#. module: stock_picking_compute_delivery_date
+#: view:compute.delivery.date.by.product.wizard:stock_picking_compute_delivery_date.compute_delivery_date_by_product_form
+msgid ""
+"This will recompute the delivery dates of all outgoing moves for the "
+"selected product. For Make To Stock products, the computation is based on "
+"the available stock and the expected dates of all moves of the same product. "
+"For Make To Order products, it is based on the date of the corresponding "
+"incoming move."
+msgstr ""
+
+#. module: stock_picking_compute_delivery_date
+#: code:addons/stock_picking_compute_delivery_date/model/picking.py:63
+#, python-format
+msgid "initial stock"
+msgstr "stock initial"
+
+#. module: stock_picking_compute_delivery_date
+#: view:compute.all.delivery.dates.wizard:stock_picking_compute_delivery_date.compute_all_delivery_dates_form
+#: view:compute.delivery.date.by.product.wizard:stock_picking_compute_delivery_date.compute_delivery_date_by_product_form
+msgid "or"
+msgstr "ou"

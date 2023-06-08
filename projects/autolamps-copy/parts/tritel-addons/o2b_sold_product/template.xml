@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+<template id="products_item_change" inherit_id="website_sale.products_item" name="Product item Change">
+  <xpath expr="//span[@itemprop='priceCurrency']" position="after">
+              <span t-if="product.sold_ok" class="soldout">Sold</span>
+    </xpath>
+</template>
+
+<template id="products_add_to_cart_new" inherit_id="website_sale.products_add_to_cart" name="Add to Cart1">
+  <xpath expr="//a[@class='btn btn-default btn-xs fa fa-shopping-cart a-submit']" position="replace">
+    <a t-if="product.sold_ok==False" class="btn btn-default btn-xs fa fa-shopping-cart a-submit"/>
+  </xpath>
+</template>
+
+<template id="product_new" inherit_id="website_sale.product" name="Product New">
+  <xpath expr="//a[@id='add_to_cart']" position="replace">
+                     <h2 t-if="product.sold_ok" class="soldout">Sold</h2>
+                     <a t-if="product.sold_ok==False" id="add_to_cart" class="btn btn-primary btn-lg mt8 js_check_product a-submit" href="#">Add to Cart</a>
+  </xpath>                
+</template>
+
+<template id="product_quantity_change" inherit_id="website_sale.product_quantity" name="Select Quantity Change">
+  <xpath expr="//div[@class='css_quantity input-group oe_website_spinner']" position="replace">
+    <div t-if="product.sold_ok==False" class="css_quantity input-group oe_website_spinner">
+        <span class="input-group-addon">
+            <a t-attf-href="#" class="mb8 js_add_cart_json">
+                <i class="fa fa-minus"></i>
+            </a>
+        </span>
+        <input type="text" class="js_quantity form-control" data-min="1" name="add_qty" value="1"/>
+        <span class="input-group-addon">
+            <a t-attf-href="#" class="mb8 float_left js_add_cart_json">
+                <i class="fa fa-plus"></i>
+            </a>
+        </span>
+    </div>
+  </xpath>
+</template>
+
+    </data>
+</openerp>

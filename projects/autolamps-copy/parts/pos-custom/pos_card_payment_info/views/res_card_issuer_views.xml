@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 OpenSynergy Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+<record id="res_card_issuer_view_tree" model="ir.ui.view">
+    <field name="name">Tree PoS Issuer</field>
+    <field name="model">res.card_issuer</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+        </tree>
+    </field>
+</record>
+
+<record id="res_card_issuer_view_form" model="ir.ui.view">
+    <field name="name">Form PoS Issuer</field>
+    <field name="model">res.card_issuer</field>
+    <field name="arch" type="xml">
+        <form string="Card Issuer">
+            <sheet>
+                <group col="4">
+                    <field name="name" />
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="res_card_issuer_action" model="ir.actions.act_window">
+    <field name="name">Issuer</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.card_issuer</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">
+        Click to add a Card Issuer.
+      </p>
+    </field>
+</record>
+
+<menuitem
+    id="res_card_issuer_menu"
+    name="Issuer"
+    parent="pos_electronic_payment_menu"
+    groups="point_of_sale.group_pos_manager"
+    action="res_card_issuer_action"
+    />
+
+</data>
+</openerp>

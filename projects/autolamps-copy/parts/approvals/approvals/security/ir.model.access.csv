@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+approval_request_user,Approval Request User,model_approval_request,approvals.group_user,1,1,1,0
+approval_request_manager,Approval Request Manager,model_approval_request,approvals.group_manager,1,1,1,0
+approval_request_admin,Approval Request Admin,model_approval_request,approvals.group_admin,1,1,1,1
+approval_request_lines_user,Approval Request Lines User,model_approval_request_lines,approvals.group_user,1,1,1,0
+approval_request_lines_manager,Approval Request Lines Manager,model_approval_request_lines,approvals.group_manager,1,1,1,0
+approval_request_lines_admin,Approval Request Lines Admin,model_approval_request_lines,approvals.group_admin,1,1,1,1
+approval_templates_user,Approval Templates User,model_approval_template,approvals.group_user,1,0,0,0
+approval_templates_manager,Approval Templates Manager,model_approval_template,approvals.group_manager,1,1,1,0
+approval_templates_admin,Approval Templates Admin,model_approval_template,approvals.group_admin,1,1,1,1
+additional_approvers_user,Additional Approvers User,model_additional_approvers,approvals.group_user,1,0,0,0
+additional_approvers_manager,Additional Approvers Manager,model_additional_approvers,approvals.group_manager,1,1,1,0
+additional_approvers_admin,Additional Approvers Admin,model_additional_approvers,approvals.group_admin,1,1,1,1
+approval_comments_user,Approval Comments User,model_approval_comments,approvals.group_user,1,0,1,0
+approval_comments_manager,Approval Comments Manager,model_approval_comments,approvals.group_manager,1,0,1,0
+approval_comments_admin,Approval Comments Admin,model_approval_comments,approvals.group_admin,1,0,1,0
+access_approval_message,approval messages,model_approval_message,approvals.group_user,1,1,1,0

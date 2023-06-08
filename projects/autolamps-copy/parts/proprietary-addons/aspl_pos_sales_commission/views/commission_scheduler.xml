@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- scheduler for the calculate the pos commission -->
+        <record id="scheduler_calculate_pos_commission" model="ir.cron">
+            <field name="name">Calculate POS Commission</field>
+            <field eval="True" name="active"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False" />
+            <field name="model" eval="'commission.rule.group'"/>
+            <field name="function" eval="'compute_commission_amount'"/>
+        </record>
+
+        <!-- scheduler for the pay commission by invoice -->
+        <record id="scheduler_pos_commission_generate_invoice" model="ir.cron">
+            <field name="name">Generate Invoice - POS Commission</field>
+            <field eval="True" name="active"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False" />
+            <field name="model" eval="'sales.commission'"/>
+            <field name="function" eval="'generate_commission_invoice'"/>
+        </record>
+
+        <!-- sales target sequence -->
+        <record id="commission_sales_target_sequence_type" model="ir.sequence.type">
+            <field name="name">Sales Target Number</field>
+            <field name="code">sales.target.number</field>
+        </record>
+
+        <record id="commission_sales_target_sequence" model="ir.sequence">
+            <field name="name">Sales Target Number</field>
+            <field name="code">sales.target.number</field>
+            <field name="prefix">ST</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- When module install old pos order is mark as a calculated commission. -->
+        <function model="pos.order" name="_mark_as_commission_calculated"/>
+
+    </data>
+</openerp>

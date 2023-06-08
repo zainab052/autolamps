@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<openerp>
+	<data>
+		<record id="pos_extra_utilities_view" model="ir.ui.view">
+			<field name="name">POS Configuration</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.view_pos_config_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@string='Receipt']" position="after">	
+					<group string='POS Extra Utilities'>
+						<group>
+							<field name='validation_check'/>
+ 							<field name='disable_price_modification'/>
+ 							<field name='disable_discount_button'/>
+ 							<field name='disable_delete_button'/>
+ 							<field name='allow_only_price_increase' attrs="{'readonly': [('disable_price_modification', '=', True)]}"/>	
+						</group>
+					</group>
+ 				</xpath>
+			</field>
+		</record>	
+	</data>
+</openerp>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="aspl_inherits_view_account_config_settings" model="ir.ui.view">
+            <field name="name">account.settings</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//separator[@name='analytic_account']" position="before">
+                    <group string="POS Sales Commission">
+                        <field name="commission_account_id" class="oe_inline" />
+                        <field name="commission_pay_by" class="oe_inline"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="aspl_inherit_account_invoice_supplier_form_view" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//page//field[@name='invoice_line']//tree" position="inside">
+                    <field name="sale_commission_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

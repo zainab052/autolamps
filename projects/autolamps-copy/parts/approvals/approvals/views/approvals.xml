@@ -1,0 +1,431 @@
+<openerp>
+  <data>
+    <!--All Approvals code Views to be created here. Limited extensions expected-->
+
+    <record model = 'ir.actions.act_window' id = 'approval_comments_action'>
+      <field name = 'name'>Approval Comments</field>
+      <field name = 'res_model'>approval.comments</field>
+      <field name = 'view_type'>form</field>
+      <field name = 'view_mode'>tree</field>
+    </record>
+
+    <!--Approval Templates-->
+    <record model = 'ir.ui.view' id = 'approval_templates_form_view'>
+      <field name = 'name'>Approval Templates</field>
+      <field name = 'model'>approval.template</field>
+      <field name = 'arch' type = 'xml'>
+        <form string = 'Approval Templates'>
+          <sheet>
+            <group>
+              <field name = 'name'/>
+              <field name = 'description'/>
+              <field name = 'document_type'/>
+              <field name = 'limit_type'/>
+              <field name = 'enable_email_notifications'/>
+              <field name = 'default'/>
+              <field name = 'approval_group_id'/>
+            </group>
+            <notebook>
+              <page string = 'Additional Approvers'>
+                <field name = 'additional_approver_ids'>
+                  <tree editable = 'bottom'>
+                    <field name = 'sequence' widget = 'handle'/>
+                    <field name = 'approver_id'/>
+                    <field name = 'minimum_amount'/>
+                    <field name = 'maximum_amount'/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model = "ir.ui.view" id = "approval_templates_tree_view">
+      <field name = "name">Approval Template</field>
+      <field name = "model">approval.template</field>
+      <field name = "arch" type = "xml">
+        <tree string = "Approval Templates">
+          <field name = 'name'/>
+          <field name = 'description'/>
+          <field name = 'document_type'/>
+          <field name = 'enabled'/>
+          <field name = 'enable_email_notifications'/>
+        </tree>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_templates_search_view'>
+      <field name = 'name'>Approval Templates Search</field>
+      <field name = 'model'>approval.template</field>
+      <field name = 'arch' type = 'xml'>
+        <search>
+          <field name = 'name'/>
+          <field name = 'description'/>
+          <field name = 'document_type'/>
+
+          <group expand="1" string="Group By">
+              <filter name="groupby_document_type" context="{'group_by':'document_type'}" string="Document Type"/>
+
+              <filter name="groupby_grouping" context="{'group_by':'approval_group_id'}" string="Grouping"/>
+               </group>
+        </search>
+      </field>
+    </record>
+    
+    <record model = 'ir.ui.view' id = 'approval_request_form'>
+      <field name = 'name'>Approval Request</field>
+      <field name = 'model'>approval.request</field>
+      <field name = 'arch' type = 'xml'>
+        <form>
+          <header> 
+            <button name = 'show_document' type = 'object' string = 'Show Document'/>
+            <button name = 'approve_request' type = 'object' string = 'Approve' class = 'oe_highlight' attrs="{'invisible': [('state', 'not in', ['pending'])]}" confirm = 'Approve Request?'/>
+            <button name = '%(launch_modify_comment_wizard)d' type = 'action' string = 'Modify' class = 'oe_highlight' context="{'default_approval_request_id':active_id, 'default_approver_id':current_approver }" attrs="{'invisible': [('state', 'not in', ['pending'])]}"/>
+            <button name = '%(launch_rejection_comment_wizard)d' type = 'action' string = 'Reject' class = 'oe_highlight' context="{'default_approval_request_id':active_id, 'default_approver_id':current_approver }" attrs="{'invisible': [('state', 'not in', ['pending'])]}"/>
+            <field name = 'state' widget = 'statusbar'/>
+          </header>
+          <sheet>
+            <div class="oe_right oe_button_box" name="buttons">
+                     <button name="%(approval_comments_action)d" class="oe_inline oe_stat_button" type="action" context="{'search_default_approval_request_id':active_id}" icon="fa-comments">
+                        <field name = 'comments_count' string = "Comments" widget = 'statinfo'/>
+                     </button>
+                  </div>
+            <group>
+              <group>
+                <field name = 'no'/> 
+                <field name = 'date'/>
+                <field name = 'document_type'/>
+                <field name = 'approval_group_id'/> 
+                <field name = 'model'/>
+                <field name = 'company_id'/>
+              </group>
+              <group>
+                <field name = 'document_id'/>
+                <field name = 'document_no'/>
+                <field name = 'sender_id'/>
+                <field name = 'current_approver'/>
+                <field name = 'approved'/>
+                <field name = 'rejected'/>
+                <field name = 'user_modify'/>
+              </group>
+            </group>
+            <notebook>
+              <page string = 'Approvers'>
+                <field name = 'approval_request_line_ids'>
+                  <tree>
+                    <field name = 'approval_request_id' invisible = '1'/>
+                    <field name = 'sequence'/>
+                    <field name = 'approver_id'/>
+                    <field name = 'state'/>
+                    <field name = 'comments_count' string = "Comments" widget = 'statinfo'/>
+                    <button name="%(approval_comments_action)d" type="action" context="{'search_default_approval_request_id':approval_request_id,'search_default_approver_id':approver_id}" icon="terp-mail-message-new">
+                    </button>
+                    <field name = 'document_type' invisible = '1'/>
+                    <field name = 'document_id' invisible = '1'/>
+                  </tree>
+                </field>
+              </page>
+              <page string="Messages">
+                <field name="approval_message_ids" readonly="1"/>
+              </page>
+            </notebook>
+          </sheet>
+          <div class = 'oe_chatter'> 
+            <field name = 'message_follower_ids' widget = 'mail_followers'/>
+            <field name = 'message_ids' widget = 'mail_thread'/>
+           </div>
+        </form>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_request_tree'>
+      <field name = 'name'>Approval Requests</field>
+      <field name = 'model'>approval.request</field>
+      <field name = 'arch' type = 'xml'>
+        <tree colors = "black: state == 'open'; blue: state == 'pending'; green: state == 'approved'; orange: state == 'modify'; gray: state in ('rejected')">
+          <field name = 'no'/>
+          <field name = 'date'/>
+          <field name = 'sender_id'/>
+          <field name = 'current_approver'/>
+          <field name = 'document_type'/>
+          <field name = 'document_no'/>
+          <field name = 'state'/>
+        </tree>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_request_search'>
+      <field name = 'name'>Approval Requests Search</field>
+      <field name = 'model'>approval.request</field>
+      <field name = 'arch' type = 'xml'>
+        <search>
+          <field name = 'no'/>
+          <field name = 'sender_id'/>
+          <field name = 'current_approver'/>
+          <field name = 'document_type'/>
+          <field name = 'document_no'/>
+          <field name = 'document_id'/>
+          <field name = 'state'/>
+          <field name = 'approval_group_id'/>
+
+          <filter string="Draft" domain="[('state','=','open')]" name="draft_state_filter"/>
+          <filter string="Pending" domain="[('state','=','pending')]" name="pending_state_filter"/>
+          <filter string="Approved" domain="[('state','=','approved')]" name="approved_state_filter"/>
+          <filter string="Modify" domain="[('state','=','modify')]" name="modify_state_filter"/>
+          <filter string="Rejected" domain="[('state','=','rejected')]" name="rejected_state_filter"/>
+          <filter string="My" domain="[('current_approver','=',uid),('state','in',['open','pending'])]" name="my_approvals_filter"/>
+
+          <group expand="1" string="Group By">
+            <filter name="groupby_state" context="{'group_by':'state'}" string="Status"/>
+
+            <filter name="groupby_document_type" context="{'group_by':'document_type'}" string="Document Type"/>
+
+            <filter name="groupby_document_no" context="{'group_by':'document_no'}" string="Document No."/>
+
+            <filter name="groupby_approval_group_id" context="{'group_by':'approval_group_id'}" string="Approval Group"/>
+
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_request_lines_tree'>
+      <field name = 'name'>Approval Request Entries</field>
+      <field name = 'model'>approval.request.lines</field>
+      <field name = 'arch' type = 'xml'>
+        <tree colors = "black: state == 'open'; blue: state == 'pending'; green: state == 'approved'; orange: state == 'modify'; gray: state in ('rejected')">
+          <field name = 'approval_request_id' invisible = '1'/>
+          <field name = 'sequence'/>
+          <field name = 'approver_id'/>
+          <field name = 'state'/>
+          <field name = 'document_type'/>
+          <field name = 'document_id'/>
+          <field name = 'date_created'/>
+          <field name = 'date_actioned'/>
+          <field name = 'comments_count' string = "Comments" widget = 'statinfo'/>
+          <button name="%(approval_comments_action)d" type="action" context="{'search_default_approval_request_id':approval_request_id,'search_default_approver_id':approver_id}" icon="terp-mail-message-new">
+          </button>
+        </tree>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_request_lines_search'>
+      <field name = 'name'>Approval Request Search</field>
+      <field name = 'model'>approval.request.lines</field>
+      <field name = 'arch' type = 'xml'>
+        <search>
+          <field name = 'document_type'/>
+          <field name = 'document_id'/>
+        </search>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_setup_tree'>
+      <field name = 'name'>Approval Setup</field>
+      <field name = 'model'>approval.setup</field>
+      <field name = 'arch' type = 'xml'>
+        <tree>
+          <field name = 'name'/>
+          <field name = 'approval_numbers'/>
+        </tree>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_setup_form'>
+      <field name = 'name'>Approval Setup</field>
+      <field name = 'model'>approval.setup</field>
+      <field name = 'arch' type = 'xml'>
+        <form>
+          <header>
+            <button name = 'set_approval_number' type = 'object' string = 'Test'/>
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name = 'name'/>
+                <field name = 'approval_numbers'/>
+              </group>
+              <group></group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="approvals_configuration" model="ir.ui.view">
+      <field name="name">Approvals Configuration</field>
+      <field name="model">approvals.config.settings</field>
+      <field name="arch" type="xml">
+        <form string="Approvals configuration" class="oe_form_configuration">
+          <header>
+            <button string="Save" type="object" name="execute" class="oe_highlight"/>
+                      or
+            <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+          </header>
+          <group string="Numbering">
+            <label for="id" string="Numbering"/>
+            <div>
+              <div>
+                <label for="default_approval_numbers"/>
+                <field name="default_approval_numbers"/>
+              </div>
+            </div>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_groups_form'>
+      <field name = 'name'>Approval Groups</field>
+      <field name = 'model'>approval.groups</field>
+      <field name = 'arch' type = 'xml'>
+        <form>
+          <header></header>
+          <sheet>
+            <group>
+              <group>
+                <field name = 'name'/>
+              </group>
+              <group>
+                
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_groups_tree'>
+      <field name = 'name'>Approval Groups</field>
+      <field name = 'model'>approval.groups</field>
+      <field name = 'arch' type = 'xml'>
+        <tree>
+          <field name = 'name'/>
+        </tree>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_comments_tree'>
+      <field name = 'name'>Approval Comments</field>
+      <field name = 'model'>approval.comments</field>
+      <field name = 'arch' type = 'xml'>
+        <tree>
+          <field name = 'date'/>
+          <field name = 'approval_request_id'/>
+          <field name = 'approver_id'/>
+          <field name = 'comment'/>
+        </tree>
+      </field>
+    </record>
+
+    <record model = 'ir.ui.view' id = 'approval_comments_search'>
+      <field name = 'name'>Approval Comments Search</field>
+      <field name = 'model'>approval.comments</field>
+      <field name = 'arch' type = 'xml'>
+        <search>
+          <field name = 'approval_request_id'/>
+          <field name = 'approver_id'/>
+        </search>
+      </field>
+    </record>
+
+    
+
+    
+    <menuitem name = 'Approvals' id = 'approvals_main_menu' parent = "base.menu_config"/>
+    
+    
+    <menuitem name='Approvals' id='approvals_approvers_main_menu' parent='mail.mail_feeds_main' sequence='20'/>
+
+    
+    <record model = "ir.actions.act_window" id = "approval_templates_list_action">
+      <field name ="name">Approval Templates</field>
+      <field name ="res_model">approval.template</field>
+      <field name ="view_type">form</field>
+      <field name ="view_mode">tree,form</field>
+      <field name ="help" type ="html">
+        <p class ="oe_view_nocontent_create">Approval templates are used for document workflow</p>
+        <p>Create approval templates and a schedule of approvers to enforce workflow in office</p>
+        <p>activities. This design is by Tritel Technologies</p>
+      </field>
+    </record>
+    
+    <menuitem name = "Approval Templates" id = "approvals_templates_main_menu" parent = "approvals_main_menu" action = 'approval_templates_list_action'/>
+
+    <record model = 'ir.actions.act_window' id = 'approval_groups_action'>
+      <field name = 'name'>Approval Groups</field>
+      <field name = 'res_model'>approval.groups</field>
+      <field name = 'view_type'>form</field>
+      <field name = 'view_mode'>tree,form</field>
+    </record>
+
+    <menuitem name = 'Approval Groups' id = 'approval_groups' parent = 'approvals_main_menu' action = 'approval_groups_action' sequence = '20'/>
+
+    <record model = 'ir.actions.act_window' id = 'approval_request_action'>
+      <field name = 'name'>Approval Request</field>
+      <field name = 'res_model'>approval.request</field>
+      <field name = "filter" eval = "True"/>
+      <field name = 'view_type'>form</field>
+      <field name = 'view_mode'>tree,form</field>
+      <field name="context">{
+                    'search_default_my_approvals_filter': 1
+                }
+      </field>
+    </record>
+
+    <menuitem name='Approval Requests' id = 'approval_requests' parent='approvals_approvers_main_menu' action='approval_request_action' sequence = '30'/>
+
+    <record model = 'ir.actions.act_window' id = 'approval_request_lines_action'>
+      <field name = 'name'>Approval Entries</field>
+      <field name = 'res_model'>approval.request.lines</field>
+      <field name = "domain">[('approver_id','=',uid),('state','in',['open','pending'])]</field>
+      <field name = "filter" eval = "True"/>
+      <field name = 'view_type'>form</field>
+      <field name = 'view_mode'>tree</field>
+    </record>
+
+    <menuitem name='Approval Entries' id = 'approval_entries' parent='approvals_approvers_main_menu' action='approval_request_lines_action' sequence = '40'/>
+
+    <!-- Reusable approval request entries -->
+    <!-- <record model = 'ir.actions.act_window' id = 'approval_request_entries_action'>
+      <field name = 'name'>Approval Entries</field>
+      <field name = 'res_model'>approval.request.lines</field>
+      <field name = 'view_type'>form</field>
+      <field name = 'view_mode'>tree</field>
+    </record> -->
+
+    <record model = 'ir.actions.act_window' id = 'archived_approval_request_lines_action'>
+      <field name = 'name'>Archived Approval Entries</field>
+      <field name = 'res_model'>approval.request.lines</field>
+      <field name = "domain">[('approver_id','=',uid),('state','not in',['open','pending'])]</field>
+      <field name = "filter" eval = "True"/>
+      <field name = 'view_type'>form</field>
+      <field name = 'view_mode'>tree</field>
+    </record>
+
+    <menuitem name='Archived Approval Entries' id = 'archived_approval_entries' parent='approvals_approvers_main_menu' action='archived_approval_request_lines_action' sequence = '40'/>
+
+    <record model = 'ir.actions.act_window' id = 'approval_setup_action'>
+      <field name = 'name'>Approval Setup</field>
+      <field name = 'res_model'>approval.setup</field>
+      <field name = 'view_type'>form</field>
+      <field name = 'view_mode'>tree,form</field>
+    </record>
+
+    <menuitem name='Approval Setup' id = 'approval_setup' parent='approvals_approvers_main_menu' action='approval_setup_action' sequence = '90'/>
+
+    <record model = 'ir.actions.act_window' id = 'approval_settings_action'>
+      <field name = 'name'>Approvals</field>
+      <field name = 'res_model'>approvals.config.settings</field>
+      <field name = 'view_id' ref = 'approvals_configuration'/>
+      <field name = 'view_mode'>form</field>
+      <field name = 'target'>inline</field>
+    </record>
+
+    <menuitem name = 'Approvals' id = 'approval_settings_menu' parent = 'base.menu_config' action = 'approval_settings_action'/>  
+
+
+  </data>
+</openerp>

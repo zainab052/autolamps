@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!--
+        T-1
+        Inherit Template Client Screen
+        Menambahkan Tombol "Select Table"
+    -->
+    <t t-extend="ClientListScreenWidget">
+        <t t-jquery="span.new-customer" t-operation="after">
+            <span class="button select-table">
+                Select Table
+            </span>
+        </t>
+    </t>
+
+    <!--
+        T-2
+        Membuat Template Pop Up Widget Untuk Floor
+    -->
+    <t t-name="FloorPopupWidget">
+        <div class="modal-dialog custom-dialog">
+            <div class="popup popup-select-floors" >
+                 <div class="floor-header">
+                    <div class="floor-heading">
+                        Floors List
+                    </div>
+                    <div class=" button" id="floor-cancel">
+                        CANCEL
+                    </div>
+                </div>
+                <div class="floor-data" >
+                    <span class="placeholder-FloorListScreenWidget" />
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!--
+        T-3
+        Membuat Template Screen Widget Untuk Floor
+    -->
+    <t t-name="FloorListScreenWidget">
+        <div class="floor_list_class">
+            <ol  class="floor_list">
+            </ol>
+        </div>
+    </t>
+
+    <!--
+        T-4
+        Membuat Template List Widget Untuk Floor
+    -->
+    <t t-name="FloorListWidget">
+        <span class='floor_list_widget' t-att-data-floor-id="widget.model_floor.id">
+            <button class="floor-button">
+                <t t-esc="widget.model_floor.floor_name"/>
+            </button>
+        </span>
+    </t>
+
+    <!--
+        T-5
+        Membuat Template Pop Up Widget Untuk Table
+    -->
+
+    <t t-name="TablePopupWidget">
+        <div class="modal-dialog custom-dialog">
+            <div class="popup popup-select-table" >
+                <div class="floor-heading">
+                    Tables List
+                </div>
+                <div class="table-data" >
+                </div>
+            </div>
+        </div>
+
+    </t>
+
+    <!--
+        T-6
+        Membuat Template List Widget Untuk Table
+    -->
+    <t t-name="TableListWidget">
+        <div class='table-list'>
+            <span class='button' id='table-ok'>
+                <i style="color: black;">
+                OK
+                </i>
+            </span>
+            <span class='button' id='table-back'>
+                <i class='fa fa-angle-double-left'></i>
+                Back
+            </span>
+            <select class='selected_table' name='select_table'>
+                <option value=''>--Select--</option>
+                <t t-foreach='widget.model_table' t-as='table'>
+                    <option t-att-value='table.id'>
+                        <t t-esc='table.full_table_name'/>
+                    </option>
+                </t>
+            </select>
+            <input class='table-guest'
+                    name='tableguest-input'
+                    placeholder='--Number of Guest--'/>
+        </div>
+    </t>
+
+    <!--
+        T-7
+        Menambahkan Informasi Table pada tab order
+    -->
+    <t t-extend="OrderButtonWidget">
+        <t t-jquery="span.order-sequence" t-operation="after">
+            <span class='order-table'>
+                <t t-if="widget.order.get_table()">
+                    <i class='fa'/>
+                    <img src="/pos_restaurant_table_management/static/src/img/table.png" />
+                    <t t-esc="widget.order.get_table_name()"/>
+                </t>
+            </span>
+        </t>
+    </t>
+</templates>

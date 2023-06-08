@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <!--Approval Request Numbers-->
+    <record model = 'ir.sequence.type' id = 'seq_type_approval_request_id'>
+      <field name = "name">Approval Request Number</field>
+      <field name = "code">approval.request</field>
+    </record>
+    <record model = "ir.sequence" id = "seq_approval_request_id">
+      <field name = "name">Approval Request Numbers</field>
+      <field name = "code">approval.request</field>
+      <field name = "prefix">APPROVAL</field>
+      <field name = "padding">4</field>
+    </record>  
+
+  </data>
+</openerp>

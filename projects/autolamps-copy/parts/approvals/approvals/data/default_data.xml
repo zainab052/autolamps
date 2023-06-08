@@ -1,0 +1,8 @@
+<openerp>
+	<data>
+		<record model = 'approval.setup' id = 'approval_setup_data'>
+			<field name = 'name'>Setup</field>
+			<!-- <field name = 'approval_numbers'>10</field> -->
+		</record>
+	</data>
+</openerp>
