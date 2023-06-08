@@ -9,7 +9,6 @@
 # Buildout
 develop-eggs
 eggs/*
-parts/*
 bin
 etc
 upgrade.py
