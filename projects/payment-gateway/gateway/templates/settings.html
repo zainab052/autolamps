@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <span>Current url {{ setup.url }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <form action="{{ url_for('admin.seturl') }}" method="POST">
+                <div class="form-floating mb-3">
+                    <input name="url" type="text" class="form-control" id="floatingInput" placeholder="https://...">
+                    <label for="floatingInput">Callback url</label>
+                </div>
+                <input type="submit" id="submit" value="Set Url" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
